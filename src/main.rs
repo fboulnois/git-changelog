@@ -74,6 +74,16 @@ fn get_header(version: &Option<String>, version_next: &str, url: &str, date: &st
     vec![header, "".to_string()]
 }
 
+// capitalize first letter and format bulletpoint
+fn get_list_bullet(s: &str) -> String {
+    let mut c = s.chars();
+    let bullet = match c.next() {
+        None => String::new(),
+        Some(ch) => ch.to_uppercase().collect::<String>() + c.as_str(),
+    };
+    format!("* {}", bullet)
+}
+
 // create specific changelog chunk for each version
 fn get_chunk(chunks: &mut HashMap<String, Vec<String>>, tag: &str, header: &str) -> Vec<String> {
     let mut chunk = Vec::new();
@@ -81,7 +91,7 @@ fn get_chunk(chunks: &mut HashMap<String, Vec<String>>, tag: &str, header: &str)
         if !items.is_empty() {
             chunk.append(&mut vec![format!("### {}", header), "".to_string()]);
             for added in items.clone().iter().rev() {
-                chunk.push(format!("* {}", added));
+                chunk.push(get_list_bullet(added));
             }
             chunk.push("".to_string());
             items.clear();
