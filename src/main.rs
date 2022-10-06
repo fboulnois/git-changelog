@@ -1,4 +1,4 @@
-use std::{collections::HashMap, io::Write, process::Command, fs::File};
+use std::{collections::HashMap, fs::File, io::Write, process::Command};
 
 use once_cell::sync::Lazy;
 use regex::{Captures, Regex};
@@ -180,5 +180,5 @@ fn main() {
     }
 
     let mut file = File::create("CHANGELOG.md").unwrap();
-    write!(file, "{}", get_changelog(&chunks)).unwrap();
+    writeln!(file, "{}", get_changelog(&chunks)).unwrap();
 }
