@@ -177,21 +177,21 @@ fn main() {
 
     let last = log.len() - 1;
     for (i, line) in log.iter().enumerate() {
-        let caps = RGX_GIT.captures(line);
-        if let Some(tag) = get_match(&caps, "tag") {
-            if let Some(text) = get_match(&caps, "text") {
+        let caps_line = RGX_GIT.captures(line);
+        if let Some(tag) = get_match(&caps_line, "tag") {
+            if let Some(text) = get_match(&caps_line, "text") {
                 chunks.entry(tag).or_insert(Vec::new()).push(text);
             }
         }
-        if let Some(parens) = get_match(&caps, "parens") {
+        if let Some(parens) = get_match(&caps_line, "parens") {
             let caps_tag = RGX_TAG.captures(&parens);
             if let Some(version_next) = get_match(&caps_tag, "version") {
-                add_chunks(&caps, &mut chunks, &version, &version_next, &url);
+                add_chunks(&caps_line, &mut chunks, &version, &version_next, &url);
                 version = Some(version_next);
             }
         }
         if i == last {
-            add_chunks(&caps, &mut chunks, &version, "main", &url);
+            add_chunks(&caps_line, &mut chunks, &version, "main", &url);
         }
     }
 
