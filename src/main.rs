@@ -5,8 +5,11 @@ use regex::{Captures, Regex};
 
 // regex to match git log output
 static RGX_GIT: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(?P<date>\d{4}-\d{2}-\d{2})  (\(.*tag: (?P<version>v?[.\d]+).*\) )*(?P<tag>docs|feat|fix|refactor|style): (?P<text>.*)").unwrap()
+    Regex::new(r"(?P<date>\d{4}-\d{2}-\d{2})(?P<parens>.*)(?P<tag>docs|feat|fix|refactor|style): (?P<text>.*)").unwrap()
 });
+
+// regex to match git tags
+static RGX_TAG: Lazy<Regex> = Lazy::new(|| Regex::new(r"tag: (?P<version>[v0-9.]+)").unwrap());
 
 // extract git log output as lines
 fn git_log() -> Vec<String> {
@@ -180,9 +183,12 @@ fn main() {
                 chunks.entry(tag).or_insert(Vec::new()).push(text);
             }
         }
-        if let Some(version_next) = get_match(&caps, "version") {
-            add_chunks(&caps, &mut chunks, &version, &version_next, &url);
-            version = Some(version_next);
+        if let Some(parens) = get_match(&caps, "parens") {
+            let caps_tag = RGX_TAG.captures(&parens);
+            if let Some(version_next) = get_match(&caps_tag, "version") {
+                add_chunks(&caps, &mut chunks, &version, &version_next, &url);
+                version = Some(version_next);
+            }
         }
         if i == last {
             add_chunks(&caps, &mut chunks, &version, "main", &url);
