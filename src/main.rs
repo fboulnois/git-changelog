@@ -138,7 +138,7 @@ fn add_chunks(
     if (version_next == "v1.0.0" || version_next == "1.0.0") && !any_chunks(chunks) {
         chunks
             .entry("feat".to_string())
-            .or_insert(Vec::new())
+            .or_default()
             .push("initial release".to_string());
     }
     // append changelog chunks if they exist
@@ -148,10 +148,7 @@ fn add_chunks(
         chunk.append(&mut get_header(version, version_next, url, &date));
         chunk.append(&mut get_all_chunks(chunks));
         let chunk = chunk.join("\n");
-        chunks
-            .entry("final".to_string())
-            .or_insert(Vec::new())
-            .push(chunk);
+        chunks.entry("final".to_string()).or_default().push(chunk);
     }
 }
 
@@ -180,7 +177,7 @@ fn main() {
         let caps_line = RGX_GIT.captures(line);
         if let Some(tag) = get_match(&caps_line, "tag") {
             if let Some(text) = get_match(&caps_line, "text") {
-                chunks.entry(tag).or_insert(Vec::new()).push(text);
+                chunks.entry(tag).or_default().push(text);
             }
         }
         if let Some(parens) = get_match(&caps_line, "parens") {
