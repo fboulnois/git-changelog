@@ -46,7 +46,7 @@ fn git_remote_url() -> String {
     let txt = std::str::from_utf8(&output.stdout).unwrap().to_string();
 
     let rgx = Regex::new(".git\n$").unwrap();
-    rgx.replace(&txt, "").to_string()
+    rgx.replace(&txt, "").trim_end().to_string()
 }
 
 // extract regex matches as strings
