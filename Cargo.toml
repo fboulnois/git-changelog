@@ -6,6 +6,7 @@ authors = [ "fboulnois <fboulnois@users.noreply.github.com>" ]
 description = "Create a changelog from semantic git commits"
 keywords = [ "git", "changelog" ]
 readme = "README.md"
+license = "MPL-2.0"
 
 [dependencies]
 regex = "1"
