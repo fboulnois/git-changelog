@@ -5,7 +5,7 @@ use regex::{Captures, Regex};
 
 // regex to match git log output
 static RGX_GIT: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(?P<date>\d{4}-\d{2}-\d{2})(?P<parens>.*)(?P<tag>docs|feat|fix|refactor|style): (?P<text>.*)").unwrap()
+    Regex::new(r"(?P<date>\d{4}-\d{2}-\d{2})(?P<parens>.*)(?P<tag>chore|docs|feat|fix|refactor|style|test): (?P<text>.*)").unwrap()
 });
 
 // regex to match git tags
