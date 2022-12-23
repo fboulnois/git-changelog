@@ -1,6 +1,6 @@
 [package]
 name = "git-changelog"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2021"
 authors = [ "fboulnois <fboulnois@users.noreply.github.com>" ]
 description = "Create a changelog from semantic git commits"
@@ -11,3 +11,4 @@ license = "MPL-2.0"
 [dependencies]
 regex = "1"
 once_cell = "1"
+indexmap = "1"
