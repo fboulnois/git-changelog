@@ -5,7 +5,7 @@ this repository's [`CHANGELOG.md`](CHANGELOG.md) for an example.
 
 ## How to build:
 
-Type `cargo build --release`.
+Type `cargo build --release`. Versioned releases are also available on [Github](https://github.com/fboulnois/git-changelog/releases).
 
 ## How to use:
 
