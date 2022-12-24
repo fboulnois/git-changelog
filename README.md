@@ -1,6 +1,7 @@
 # `git-changelog`
 
-A rust program to generate a `CHANGELOG.md` from semantic git commits.
+A rust program to generate a `CHANGELOG.md` from semantic git commits. Check out
+this repository's [`CHANGELOG.md`](CHANGELOG.md) for an example.
 
 ## How to build:
 
