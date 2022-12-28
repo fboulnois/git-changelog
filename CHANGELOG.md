@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.1.1](https://github.com/fboulnois/git-changelog/compare/v1.1.0...v1.1.1) - 2022-12-24
+
+### Fixed
+
+* Exclude target directory from docker build
+
 ## [v1.1.0](https://github.com/fboulnois/git-changelog/compare/v1.0.0...v1.1.0) - 2022-12-23
 
 ### Changed
